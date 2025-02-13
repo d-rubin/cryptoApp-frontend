@@ -8,6 +8,7 @@ type Coin = {
       "currentPrice": number,
       "marketCapRank": number,
       "priceChangePercentage7dInCurrency": number,
+      "image"?: string
     }
 
 export default async function Home() {
@@ -20,6 +21,6 @@ export default async function Home() {
   const json: { coins: Array<Coin>} = await response.json();
 
   return json.coins.map((coin) => {
-      return <CryptoCurrencyCard name={coin.name} symbol={coin.symbol} currentPrice={coin.currentPrice} priceChange7d={coin.priceChangePercentage7dInCurrency} />
+      return <CryptoCurrencyCard key={coin.coinId} name={coin.name} symbol={coin.symbol} currentPrice={coin.currentPrice} priceChange7d={coin.priceChangePercentage7dInCurrency} image={coin.image} />
   })
 }

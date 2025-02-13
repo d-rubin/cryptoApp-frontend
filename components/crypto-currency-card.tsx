@@ -1,15 +1,17 @@
 import { ArrowDown, ArrowUp } from "lucide-react"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import Image from "next/image";
 
 interface CryptoCurrencyCardProps {
   name: string
   symbol: string
   currentPrice: number
   priceChange7d: number
+  image?: string
 }
 
-export function CryptoCurrencyCard({ name, symbol, currentPrice, priceChange7d }: CryptoCurrencyCardProps) {
+export function CryptoCurrencyCard({ name, symbol, currentPrice, priceChange7d, image }: CryptoCurrencyCardProps) {
   const isPriceUp = priceChange7d >= 0
   const priceChangeColor = isPriceUp ? "text-green-600" : "text-red-600"
   const numberFormatter = new Intl.NumberFormat("de-DE", { style:"currency", currency:"EUR"});
@@ -17,9 +19,12 @@ export function CryptoCurrencyCard({ name, symbol, currentPrice, priceChange7d }
 
   return (
     <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold">{name}</CardTitle>
-        <p className="text-sm text-muted-foreground">{symbol.toUpperCase()}</p>
+      <CardHeader className="flex flex-row justify-between">
+        <div>
+          <CardTitle className="text-2xl font-bold">{name}</CardTitle>
+          <p className="text-sm text-muted-foreground">{symbol.toUpperCase()}</p>
+        </div>
+        {image && <Image src={image} alt={""} aria-hidden width={50} height={50} />}
       </CardHeader>
       <CardContent>
         <div className="flex justify-between items-baseline">
