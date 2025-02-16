@@ -1,4 +1,5 @@
 import {CryptoCurrencyCard} from "@/components/crypto-currency-card";
+import {revalidatePath} from "next/cache";
 
 type Coin = {
     "id": number,
@@ -12,7 +13,8 @@ type Coin = {
 };
 
 export default async function Home() {
-    const response = await fetch(`${process.env.API_URL}/coins`, {cache: "no-store"});
+    revalidatePath('/coins', "page");
+    const response = await fetch(`${process.env.API_URL}/coins`);
 
     if (response.status !== 200) {
         return <div>There was an error fetching the coin-data: {response.status} {response.statusText}</div>;
