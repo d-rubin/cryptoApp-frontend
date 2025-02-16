@@ -12,7 +12,6 @@ type Coin = {
 };
 
 export default async function Home({searchParams}: ({ searchParams: Promise<Record<string, string>> })) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const searchParamsObject = await searchParams;
     const response = await fetch(`${process.env.API_URL}/coins`, {cache: "no-store"});
 
