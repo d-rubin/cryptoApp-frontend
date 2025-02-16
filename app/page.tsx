@@ -11,7 +11,8 @@ type Coin = {
     "image"?: string
 };
 
-export default async function Home() {
+export default async function Home({searchParams}: ({ searchParams: Promise<Record<string, string>> })) {
+    const searchParamsObject = await searchParams;
     const response = await fetch(`${process.env.API_URL}/coins`, {cache: "no-store"});
 
     if (response.status !== 200) {
